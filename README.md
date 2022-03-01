@@ -19,5 +19,5 @@ This plugin allows the user to view post word count and load time. The settings 
 
 ## License
 MIT 2022
-- Created using a http://learnwebcode.com/ tutorial
+- Created using a http://learnwebcode.com/ tutorial https://www.youtube.com/watch?v=hbJiwm5YL5Q
 
