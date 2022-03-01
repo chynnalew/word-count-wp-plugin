@@ -21,7 +21,10 @@ class WordCountAndTimePlugin {
   }
 
   function locationHTML() { ?>
-    hello!
+    <select name="wcp_location">
+      <option value="0">Beginning of post</option>
+      <option value="1">End of Post</option>
+    </select>
   <?php }
 
   function adminPage() {
@@ -33,7 +36,9 @@ class WordCountAndTimePlugin {
       <h1> Word Count Settings </h1>
       <form action="options.php" method="post">
         <?php
+          settings_fields('wordcountplugin');
           do_settings_sections('word-count-settings-page');
+          submit_button();
         ?>
       </form>
     </div>
