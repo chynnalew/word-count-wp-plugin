@@ -72,7 +72,7 @@ class WordCountAndTimePlugin {
   <?php }
 
   function characterCountHTML() { ?>
-    <input type="checkbox" name='wcp_character_count' value="1" <?php checked(get_option('wcp_character_count'). '1')?>>
+    <input type="checkbox" name='wcp_character_count' value="1" <?php checked(get_option('wcp_character_count'), '1')?>>
   <?php }
 
   function readTimeHTML() { ?>
