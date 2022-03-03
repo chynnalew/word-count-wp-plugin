@@ -9,6 +9,7 @@
 
 class WordCountAndTimePlugin {
   function __construct(){
+    // the array($this, 'function') syntax is used to tell wordpress the name of the function so it can find the function at a later time
     add_action('admin_menu', array($this, 'adminPage'));
     add_action('admin_init', array($this, 'settings'));
     add_filter('the_content', array($this, 'ifWrap'));
@@ -17,14 +18,19 @@ class WordCountAndTimePlugin {
   //function to filter the content only if any of the setting check boxes are checked
   function ifWrap($content){
     if((is_main_query() AND is_single()) AND (get_option('wcp_word_count', '1') OR get_option('wcp_character_count', '1') OR get_option('wcp_read_time', '1'))) {
+      //use the $this->method to execute the function
       return $this->createHTML($content);
     } else {
       $content;
     }
   }
   //function to add stats to content if conditions of ifWrap are met
-  function createHTML(){
-    return $content . "TEST TEST TEST!!!";
+  function createHTML($content){
+    $html = '<h3>' . get_option('wcp_headline', 'Statistics') . '</h3><p>';
+    if(get_option('wcp_location', '0') == '0'){
+      return $html . $content;
+    } 
+    return $content . $html;
   }
 
   function settings() {
