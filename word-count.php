@@ -40,7 +40,7 @@ class WordCountAndTimePlugin {
       <option value="1" <?php selected(get_option('wcp_location'), '1') ?>>End of Post</option>
     </select>
   <?php }
-
+  // function to compare input to possible options. if option is valid, save input, else, default to last input and display error
   function sanitizeLocation($input) {
     if ($input != '0' AND $input != '1') {
       add_settings_error('wcp_location', 'WCP_LOCATION_ERROR', 'Display location must be beginning or end');
