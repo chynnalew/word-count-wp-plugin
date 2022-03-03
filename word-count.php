@@ -27,6 +27,20 @@ class WordCountAndTimePlugin {
   //function to add stats to content if conditions of ifWrap are met
   function createHTML($content){
     $html = '<h3>' . get_option('wcp_headline', 'Statistics') . '</h3><p>';
+    
+    if(get_option('wcp_word_count', '1') OR get_option('wcp_read_time', '1')){
+      //save word count in a variable - will be used for wordcount and readtime
+      $wordCount = str_word_count(strip_tags($content));
+    }
+    if(get_option('wcp_word_count', '1')) {
+      $html .= 'This post has ' . $wordCount . ' words.<br>';
+    }
+    if(get_option('wcp_character_count', '1')) {
+      $html .= 'This post has ' . strlen(strip_tags($content)) . ' characters.<br>';
+    }
+    if(get_option('wcp_read_time', '1')) {
+      $html .= 'This post takes approximately ' . ceil($wordCount/225) . ' minute(s) to read.<br>';
+    }
     if(get_option('wcp_location', '0') == '0'){
       return $html . $content;
     } 
