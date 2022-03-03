@@ -16,8 +16,21 @@ class WordCountAndTimePlugin {
 
   function settings() {
     add_settings_section('wcp_first_section', null, null, 'word-count-settings-page',);
+    // location setting
     add_settings_field('wcp_location', 'Display Location', array($this, 'locationHTML'), 'word-count-settings-page', 'wcp_first_section');
     register_setting('wordcountplugin', 'wcp_location', array('sanitize_callback' => 'sanitize_text_field', 'default' => '0'));
+    // headline text
+    add_settings_field('wcp_headline', 'Headline Text', array($this, 'headlineHTML'), 'word-count-settings-page', 'wcp_first_section');
+    register_setting('wordcountplugin', 'wcp_headline', array('sanitize_callback' => 'sanitize_text_field', 'default' => 'Post Statistics'));
+    // Word count
+    add_settings_field('wcp_word_count', 'Word Count', array($this, 'wordCountHTML'), 'word-count-settings-page', 'wcp_first_section');
+    register_setting('wordcountplugin', 'wcp_word_count', array('sanitize_callback' => 'sanitize_text_field', 'default' => '1'));
+    // Character count
+    add_settings_field('wcp_character_count', 'Character Count', array($this, 'characterCountHTML'), 'word-count-settings-page', 'wcp_first_section');
+    register_setting('wordcountplugin', 'wcp_character_count', array('sanitize_callback' => 'sanitize_text_field', 'default' => '1'));
+    // Read time
+    add_settings_field('wcp_read_time', 'Read Time', array($this, 'readTimeHTML'), 'word-count-settings-page', 'wcp_first_section');
+    register_setting('wordcountplugin', 'wcp_read_time', array('sanitize_callback' => 'sanitize_text_field', 'default' => '1'));
   }
 
   function locationHTML() { ?>
@@ -25,6 +38,22 @@ class WordCountAndTimePlugin {
       <option value="0" <?php selected(get_option('wcp_location'), '0') ?> >Beginning of post</option>
       <option value="1" <?php selected(get_option('wcp_location'), '1') ?>>End of Post</option>
     </select>
+  <?php }
+
+  function headlineHTML() { ?>
+    <input type="text" name='wcp_headline' value="<?php echo esc_attr(get_option('wcp_headline'))?>">
+  <?php }
+
+  function wordCountHTML() { ?>
+    <input type="checkbox" name='wcp_word_count' value="1" <?php checked(get_option('wcp_word_count'),"1")?>>
+  <?php }
+
+  function characterCountHTML() { ?>
+    <input type="checkbox" name='wcp_character_count' value="1" <?php checked(get_option('wcp_character_count'). '1')?>>
+  <?php }
+
+  function readTimeHTML() { ?>
+    <input type="checkbox" name='wcp_read_time' value='1' <?php checked(get_option('wcp_read_time'), '1')?>>
   <?php }
 
   function adminPage() {
